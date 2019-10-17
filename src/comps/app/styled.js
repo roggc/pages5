@@ -5,6 +5,7 @@ styled.div
 `
 font-family:sans-serif;
 color:ghostwhite;
+user-select:none;
 `
 
 export const Container=
@@ -25,6 +26,12 @@ border-radius:5px;
 padding:5px;
 margin:5px;
 height:333px;
+>div,>div>div,>div>div>div
+{
+  height:100%;
+}
+>div>div>div
+{width:100%}
 `
 
 export const Fade=

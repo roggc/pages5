@@ -9,6 +9,7 @@ import {CSSTransition,TransitionGroup} from 'react-transition-group'
 import About2 from '../about2/index'
 import Home2 from '../home2/index'
 import Invisible from '../invisible/index'
+import Hits from '../hits/index'
 
 export default
 ()=>
@@ -31,6 +32,7 @@ export default
             <Switch location={location}>
               <Route path='/' exact render={()=><Abs><Home/></Abs>}/>
               <Route path='/about' render={()=><Abs><About/></Abs>}/>
+              <Route path='/hits' render={()=><Abs><Hits/></Abs>}/>
             </Switch>
           </CSSTransition></TransitionGroup></Fade>
         }/>

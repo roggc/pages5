@@ -25,6 +25,7 @@ export default
       <Modal className={state.showModal?'show':'notShow'} onClick={modalClick}>
         <div onClick={toggleShow}><Link to='/'>home</Link></div>
         <div onClick={toggleShow}><Link to='/about'>about</Link></div>
+        <div onClick={toggleShow}><Link to='/hits'>hits</Link></div>
       </Modal>
     </Float>
   </Row>

@@ -66,4 +66,5 @@ a
 }
 right:32px;
 cursor:initial;
+z-index:1;
 `
