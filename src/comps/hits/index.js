@@ -7,20 +7,24 @@ export default
 ()=>
 {
   const [state,setState]=useState({hits: [],loaded:false})
-  const fetch=
+  const fetchData=
   useCallback
   (
-    async ()=>
+    ()=>
     {
-      const result=await axios('https://hn.algolia.com/api/v1/search?query=redux')
-      setState({...state,hits:result.data.hits,loaded:true})
+      fetch('https://hn.algolia.com/api/v1/search?query=react')
+      .then(resp=>resp.json())
+      .then(json=>setState({...state,hits:json.hits,loaded:true}))
     }
     ,[]
   )
   useEffect
   (
-    ()=>{fetch()}
-    ,[fetch]
+    ()=>
+    {
+      fetchData()
+    }
+    ,[fetchData]
   )
   const el=
   <Div>
