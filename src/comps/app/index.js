@@ -10,6 +10,7 @@ import About2 from '../about2/index'
 import Home2 from '../home2/index'
 import Invisible from '../invisible/index'
 import Hits from '../hits/index'
+import Counter from '../counter2/index'
 
 export default
 ()=>
@@ -33,6 +34,7 @@ export default
               <Route path='/' exact render={()=><Abs><Home/></Abs>}/>
               <Route path='/about' render={()=><Abs><About/></Abs>}/>
               <Route path='/hits' render={()=><Abs><Hits/></Abs>}/>
+              <Route path='/counter' render={()=><Abs><Counter/></Abs>}/>
             </Switch>
           </CSSTransition></TransitionGroup></Fade>
         }/>
