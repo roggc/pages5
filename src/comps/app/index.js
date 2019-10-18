@@ -17,8 +17,9 @@ import reducer from './reducer'
 export default
 ()=>
 {
-  const initialState={todos:[],showNewTodo:false}
-  const [state,dispatch]=useReducer(reducer,initialState)
+  const initialState={todo:{todos:[],inputValue:''}}
+  const [state1,dispatch1]=useReducer(reducer,initialState)
+  const [state2,dispatch2]=useReducer(reducer,initialState)
   const el=
   <Div>
   <Router>
@@ -39,7 +40,20 @@ export default
               <Route path='/about' render={()=><Abs><About/></Abs>}/>
               <Route path='/hits' render={()=><Abs><Hits/></Abs>}/>
               <Route path='/counters' render={()=><Abs><PageCounter/></Abs>}/>
-              <Route path='/todo' render={()=><Abs><Todo state={state} dispatch={dispatch}/></Abs>}/>
+              <Route path='/todo1' render=
+              {
+                ()=>
+                <Abs>
+                  <Todo state={state1.todo} dispatch={dispatch1}/>
+                </Abs>
+              }/>
+              <Route path='/todo2' render=
+              {
+                ()=>
+                <Abs>
+                  <Todo state={state2.todo} dispatch={dispatch2}/>
+                </Abs>
+              }/>
             </Switch>
           </CSSTransition></TransitionGroup></Fade>
         }/>

@@ -18,6 +18,10 @@ ul
   margin:0px;
   height:90%;
   overflow:auto;
+  .inline
+  {
+    display:inline-block;
+  }
 }
 li
 {

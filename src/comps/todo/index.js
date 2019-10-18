@@ -1,28 +1,30 @@
 import React,{useReducer,useRef,useEffect} from 'react'
 import {Div} from './styled'
 import check from '../../img/check.png'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faTrashAlt} from '@fortawesome/free-solid-svg-icons'
 
 export default
 ({state,dispatch})=>
 {
   const addTodo=
   ()=>
-  dispatch({type:'SHOW_NEW_TODO'})
+  dispatch({type:'TODO_SHOW_NEW_TODO'})
   const confirmAdd=
   e=>
   {
-    e.stopPropagation()
     const value=inputRef.current.value
     if(value!=='')
     {
-      dispatch({type:'ADD_TODO',text:value})
-      dispatch({type:'NOT_SHOW_NEW_TODO'})
+      dispatch({type:'TODO_ADD_TODO',text:value})
     }
   }
   const cancelAdd=
   ()=>
-  dispatch({type:'NOT_SHOW_NEW_TODO'})
-  const inputRef=useRef(null)
+  {
+    dispatch({type:'TODO_NOT_SHOW_NEW_TODO'})
+    dispatch({type:'TODO_SET_INPUT_VALUE',val:''})
+  }
   const allowFocus=
   e=>
   e.stopPropagation()
@@ -32,8 +34,30 @@ export default
     if(e.key==='Enter')
     {
       confirmAdd(e)
+      cancelAdd()
     }
   }
+  const setDone=
+  i=>e=>
+  dispatch({type:'TODO_SET_DONE_TODO',val:i})
+  const clearTodos=
+  ()=>
+  dispatch({type:'TODO_SHOW_CLEAR_TODOS'})
+  const confirmClear=
+  e=>
+  {
+    dispatch({type:'TODO_CLEAR_TODOS'})
+  }
+  const cancelClear=
+  ()=>
+  dispatch({type:'TODO_NOT_SHOW_CLEAR_TODOS'})
+  const inputChange=
+  e=>
+  dispatch({type:'TODO_SET_INPUT_VALUE',val:e.target.value.toUpperCase()})
+  const deleteTodo=
+  i=>e=>
+  dispatch({type:'TODO_DELETE_TODO',val:i})
+  const inputRef=useRef(null)
   useEffect
   (
     ()=>
@@ -44,20 +68,28 @@ export default
       }
     }
   )
-  const setDone=
-  i=>e=>
-  dispatch({type:'SET_DONE',val:i})
   const el=
   <Div>
     {
       state.showNewTodo?
       <div className='modal' onClick={cancelAdd} onKeyDown={keyDown}>
-        <div className='center'><input ref={inputRef} onClick={allowFocus}/></div>
+        <div className='center'>
+          <input ref={inputRef} onClick={allowFocus} onChange={inputChange} value={state.inputValue}/>
+        </div>
         <div className='center'><button onClick={confirmAdd}>add</button></div>
       </div>:
-      <div></div>
+      ''
     }
-    <button onClick={addTodo}>add</button>
+    {
+      state.showClearTodos?
+      <div className='modal' onClick={cancelClear}>
+        <div className='center'>CLEAR?</div>
+        <div className='center'><button onClick={confirmClear}>clear</button></div>
+      </div>:
+      ''
+    }
+    <button onClick={addTodo}>add</button>&nbsp;
+    <button onClick={clearTodos}>clear</button>
     <ul>
       {
         state.todos.map
@@ -67,8 +99,14 @@ export default
             {todo.text}&nbsp;
             {
               todo.done?
-              <img src={check}/>:
-              <button onClick={setDone(i)}>done</button>
+              <div className='inline'>
+                <img src={check}/>&nbsp;
+                <button onClick={deleteTodo(i)}><FontAwesomeIcon icon={faTrashAlt}/></button>
+              </div>:
+              <div className='inline'>
+                <button onClick={setDone(i)}><img src={check}/></button>&nbsp;
+                <button onClick={deleteTodo(i)}><FontAwesomeIcon icon={faTrashAlt}/></button>
+              </div>
             }
           </li>
         )
