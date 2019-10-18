@@ -122,6 +122,28 @@ export default
         }
       }
       return val
+    case 'COUNT_INCREMENT':
+      val=
+      {
+        ...val
+        ,count:
+        {
+          ...val.count
+          ,count:val.count.count+1
+        }
+      }
+      return val
+    case 'COUNT_DECREMENT':
+      val=
+      {
+        ...val
+        ,count:
+        {
+          ...val.count
+          ,count:val.count.count-1
+        }
+      }
+      return val
     default:
       return val
   }

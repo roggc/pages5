@@ -13,11 +13,11 @@ import Hits from '../hits/index'
 import PageCounter from '../pageCounter/index'
 import Todo from '../todo/index'
 import reducer from './reducer'
+import initialState from './state'
 
 export default
 ()=>
 {
-  const initialState={todo:{todos:[],inputValue:''}}
   const [state1,dispatch1]=useReducer(reducer,initialState)
   const [state2,dispatch2]=useReducer(reducer,initialState)
   const el=
@@ -39,7 +39,12 @@ export default
               <Route path='/' exact render={()=><Abs><Home/></Abs>}/>
               <Route path='/about' render={()=><Abs><About/></Abs>}/>
               <Route path='/hits' render={()=><Abs><Hits/></Abs>}/>
-              <Route path='/counters' render={()=><Abs><PageCounter/></Abs>}/>
+              <Route path='/counters' render=
+              {
+                ()=>
+                <Abs><PageCounter state1={state1.count} dispatch1={dispatch1}
+                state2={state2.count} dispatch2={dispatch2}/></Abs>
+              }/>
               <Route path='/todo1' render=
               {
                 ()=>
