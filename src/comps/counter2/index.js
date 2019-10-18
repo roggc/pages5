@@ -1,6 +1,5 @@
 import React,{useReducer} from 'react'
 import {Div} from './styled'
-import SubCounter from '../subcounter/index'
 
 export default
 ()=>
@@ -41,7 +40,6 @@ export default
     <div>{state.count}</div>
     <button onClick={incrementCounter}>+</button>
     <button onClick={decrementCounter}>-</button>
-    <SubCounter dispatch={dispatch}/>
   </Div>
   return el
 }
