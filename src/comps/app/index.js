@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useReducer} from 'react'
 import {Div,Container,Fade,FloatL,FloatR,Container2,Abs} from './styled'
 import Header from '../header/index'
 import Footer from '../footer/index'
@@ -16,6 +16,58 @@ import Todo from '../todo/index'
 export default
 ()=>
 {
+  const reducer=
+  (val,act)=>
+  {
+    switch(act.type)
+    {
+      case 'SHOW_NEW_TODO':
+        val=
+        {
+          ...val
+          ,showNewTodo:true
+        }
+        return val
+      case 'NOT_SHOW_NEW_TODO':
+        val=
+        {
+          ...val
+          ,showNewTodo:false
+        }
+        return val
+      case 'SET_DONE':
+        val=
+        {
+          ...val
+        }
+        val.todos.some
+        (
+          (todo,i)=>
+          {
+            if(i===act.val)
+            {
+              todo.done=true
+            }
+          }
+        )
+        return val
+      case 'ADD_TODO':
+        val=
+        {
+          ...val
+          ,todos:
+          [
+            ...val.todos
+            ,{text:act.text,done:false}
+          ]
+        }
+        return val
+      default:
+        return val
+    }
+  }
+  const initialState={todos:[],showNewTodo:false}
+  const [state,dispatch]=useReducer(reducer,initialState)
   const el=
   <Div>
   <Router>
@@ -36,7 +88,7 @@ export default
               <Route path='/about' render={()=><Abs><About/></Abs>}/>
               <Route path='/hits' render={()=><Abs><Hits/></Abs>}/>
               <Route path='/counters' render={()=><Abs><PageCounter/></Abs>}/>
-              <Route path='/todo' render={()=><Abs><Todo/></Abs>}/>
+              <Route path='/todo' render={()=><Abs><Todo state={state} dispatch={dispatch}/></Abs>}/>
             </Switch>
           </CSSTransition></TransitionGroup></Fade>
         }/>
