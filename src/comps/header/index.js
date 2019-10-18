@@ -26,7 +26,8 @@ export default
         <div onClick={toggleShow}><Link to='/'>home</Link></div>
         <div onClick={toggleShow}><Link to='/about'>about</Link></div>
         <div onClick={toggleShow}><Link to='/hits'>hits</Link></div>
-        <div onClick={toggleShow}><Link to='/counter'>counter</Link></div>
+        <div onClick={toggleShow}><Link to='/counters'>counters</Link></div>
+        <div onClick={toggleShow}><Link to='/todo'>todo</Link></div>
       </Modal>
     </Float>
   </Row>
