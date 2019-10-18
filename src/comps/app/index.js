@@ -45,14 +45,14 @@ export default
                 <Abs><PageCounter state1={state1.count} dispatch1={dispatch1}
                 state2={state2.count} dispatch2={dispatch2}/></Abs>
               }/>
-              <Route path='/todo1' render=
+              <Route path='/todos1' render=
               {
                 ()=>
                 <Abs>
                   <Todo state={state1.todo} dispatch={dispatch1}/>
                 </Abs>
               }/>
-              <Route path='/todo2' render=
+              <Route path='/todos2' render=
               {
                 ()=>
                 <Abs>
