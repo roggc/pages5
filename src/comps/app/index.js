@@ -20,6 +20,8 @@ export default
 {
   const [state1,dispatch1]=useReducer(reducer,initialState)
   const [state2,dispatch2]=useReducer(reducer,initialState)
+  const [state3,dispatch3]=useReducer(reducer,initialState)
+  const [state4,dispatch4]=useReducer(reducer,initialState)
   const el=
   <Div>
   <Router>
@@ -39,24 +41,36 @@ export default
               <Route path='/' exact render={()=><Abs><Home/></Abs>}/>
               <Route path='/about' render={()=><Abs><About/></Abs>}/>
               <Route path='/hits' render={()=><Abs><Hits/></Abs>}/>
-              <Route path='/counters' render=
+              <Route path='/counters1' render=
               {
                 ()=>
-                <Abs><PageCounter state1={state1.count} dispatch1={dispatch1}
-                state2={state2.count} dispatch2={dispatch2}/></Abs>
+                <Abs>
+                  <PageCounter
+                  redux1={{state:state1,dispatch:dispatch1}}
+                  redux2={{state:state2,dispatch:dispatch2}}/>
+                </Abs>
+              }/>
+              <Route path='/counters2' render=
+              {
+                ()=>
+                <Abs>
+                  <PageCounter
+                  redux1={{state:state3,dispatch:dispatch3}}
+                  redux2={{state:state4,dispatch:dispatch4}}/>
+                </Abs>
               }/>
               <Route path='/todos1' render=
               {
                 ()=>
                 <Abs>
-                  <Todo state={state1.todo} dispatch={dispatch1}/>
+                  <Todo redux={{state:state1,dispatch:dispatch1}}/>
                 </Abs>
               }/>
               <Route path='/todos2' render=
               {
                 ()=>
                 <Abs>
-                  <Todo state={state2.todo} dispatch={dispatch2}/>
+                  <Todo redux={{state:state2,dispatch:dispatch2}}/>
                 </Abs>
               }/>
             </Switch>
@@ -68,6 +82,5 @@ export default
     </Container>
     </Router>
   </Div>
-
   return el
 }

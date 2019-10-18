@@ -5,7 +5,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons'
 
 export default
-({state,dispatch})=>
+({redux:{state:{todo},dispatch}})=>
 {
   const addTodo=
   ()=>
@@ -71,17 +71,17 @@ export default
   const el=
   <Div>
     {
-      state.showNewTodo?
+      todo.showNewTodo?
       <div className='modal' onClick={cancelAdd} onKeyDown={keyDown}>
         <div className='center'>
-          <input ref={inputRef} onClick={allowFocus} onChange={inputChange} value={state.inputValue}/>
+          <input ref={inputRef} onClick={allowFocus} onChange={inputChange} value={todo.inputValue}/>
         </div>
         <div className='center'><button onClick={confirmAdd}>add</button></div>
       </div>:
       ''
     }
     {
-      state.showClearTodos?
+      todo.showClearTodos?
       <div className='modal' onClick={cancelClear}>
         <div className='center'>CLEAR?</div>
         <div className='center'><button onClick={confirmClear}>clear</button></div>
@@ -92,7 +92,7 @@ export default
     <button onClick={clearTodos}>clear</button>
     <ul>
       {
-        state.todos.map
+        todo.todos.map
         (
           (todo,i)=>
           <li key={i}>
