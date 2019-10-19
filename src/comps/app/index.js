@@ -3,12 +3,9 @@ import {Div,Container,Fade,FloatL,FloatR,Container2,Abs} from './styled'
 import Header from '../header/index'
 import Footer from '../footer/index'
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
-import Home from '../home/index'
+import Login from '../login/index'
 import About from '../about/index'
 import {CSSTransition,TransitionGroup} from 'react-transition-group'
-import About2 from '../about2/index'
-import Home2 from '../home2/index'
-import Invisible from '../invisible/index'
 import Hits from '../hits/index'
 import PageCounter from '../pageCounter/index'
 import Todo from '../todo/index'
@@ -19,10 +16,10 @@ import useReducerWithKey from '../../hooks/useReducerWithKey'
 export default
 ()=>
 {
-  const [state1,dispatch1]=useReducerWithKey(reducer,initialState,'state1')
-  const [state2,dispatch2]=useReducerWithKey(reducer,initialState,'state2')
-  const [state3,dispatch3]=useReducerWithKey(reducer,initialState,'state3')
-  const [state4,dispatch4]=useReducerWithKey(reducer,initialState,'state4')
+  const redux1=useReducerWithKey(reducer,initialState,'state1')
+  const redux2=useReducerWithKey(reducer,initialState,'state2')
+  const redux3=useReducerWithKey(reducer,initialState,'state3')
+  const redux4=useReducerWithKey(reducer,initialState,'state4')
   const el=
   <Div>
   <Router>
@@ -39,7 +36,11 @@ export default
             classNames='fade'
             appear={true}>
             <Switch location={location}>
-              <Route path='/' exact render={()=><Abs><Home/></Abs>}/>
+              <Route path='/' exact render=
+              {
+                ()=>
+                <Abs><Login redux={redux1}/></Abs>
+              }/>
               <Route path='/about' render={()=><Abs><About/></Abs>}/>
               <Route path='/hits' render={()=><Abs><Hits/></Abs>}/>
               <Route path='/counters1' render=
@@ -47,8 +48,8 @@ export default
                 ()=>
                 <Abs>
                   <PageCounter
-                  redux1={{state:state1,dispatch:dispatch1}}
-                  redux2={{state:state2,dispatch:dispatch2}}/>
+                  redux1={redux1}
+                  redux2={redux2}/>
                 </Abs>
               }/>
               <Route path='/counters2' render=
@@ -56,22 +57,22 @@ export default
                 ()=>
                 <Abs>
                   <PageCounter
-                  redux1={{state:state3,dispatch:dispatch3}}
-                  redux2={{state:state4,dispatch:dispatch4}}/>
+                  redux1={redux3}
+                  redux2={redux4}/>
                 </Abs>
               }/>
               <Route path='/todos1' render=
               {
                 ()=>
                 <Abs>
-                  <Todo redux={{state:state1,dispatch:dispatch1}}/>
+                  <Todo redux={redux1}/>
                 </Abs>
               }/>
               <Route path='/todos2' render=
               {
                 ()=>
                 <Abs>
-                  <Todo redux={{state:state2,dispatch:dispatch2}}/>
+                  <Todo redux={redux2}/>
                 </Abs>
               }/>
             </Switch>

@@ -24,5 +24,5 @@ export default
     }
     ,[state]
   )
-  return [state,dispatch]
+  return {state,dispatch}
 }

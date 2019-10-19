@@ -54,6 +54,8 @@ position:relative;
 export const Modal=
 styled.div
 `
+overflow: auto;
+max-height: 79px;
 position:absolute;
 border:1px solid ghostwhite;
 border-radius:5px;

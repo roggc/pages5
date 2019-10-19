@@ -23,7 +23,7 @@ export default
     <Float onClick={toggleShow} ref={ref}>
       <FontAwesomeIcon icon={faBars}/>
       <Modal className={state.showModal?'show':'notShow'} onClick={modalClick}>
-        <div onClick={toggleShow}><Link to='/'>home</Link></div>
+        <div onClick={toggleShow}><Link to='/'>login</Link></div>
         <div onClick={toggleShow}><Link to='/about'>about</Link></div>
         <div onClick={toggleShow}><Link to='/hits'>hits</Link></div>
         <div onClick={toggleShow}><Link to='/counters1'>counters1</Link></div>
