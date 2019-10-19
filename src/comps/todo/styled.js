@@ -30,7 +30,7 @@ li
   padding:5px;
   float:left;*/
 }
-li img
+img
 {
   height:10px;
 }
@@ -56,10 +56,43 @@ li img
   {
     width:31%;
     margin:auto;
+    text-align:center;
   }
   button
   {
     margin-top:10px;
+  }
+}
+.tooltip-container
+{
+  position:relative;
+  display:inline-block;
+  .tooltip
+  {
+    visibility: hidden;
+    opacity: 0;
+    /*visibility:visible;
+    opacity:1;*/
+    transition: opacity 0.3s 1s;
+    width: 65px;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 5px 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: 127%;
+    left: 0%;
+    text-align:center;
+  }
+}
+.tooltip-container:hover
+{
+  .tooltip
+  {
+    visibility:visible;
+    opacity:1;
   }
 }
 `

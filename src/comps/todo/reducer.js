@@ -1,6 +1,7 @@
 export default
 (val={},act)=>
 {
+  let todos
   switch(act.type)
   {
     case 'TODO_SHOW_NEW_TODO':
@@ -73,7 +74,7 @@ export default
       }
       return val
     case 'TODO_DELETE_TODO':
-      const todos=val.todos.filter
+      todos=val.todos.filter
       (
         (todo,i)=>
         {
@@ -87,6 +88,33 @@ export default
       {
         ...val
         ,todos
+      }
+      return val
+    case 'TODO_SET_DONE_ALL':
+      todos=val.todos.filter(todo=>true)
+      todos.forEach
+      (
+        todo=>
+        todo.done=true
+      )
+      val=
+      {
+        ...val
+        ,todos
+      }
+      return val
+    case 'TODO_SHOW_SET_DONE_ALL':
+      val=
+      {
+        ...val
+        ,showSetDoneAll:true
+      }
+      return val
+    case 'TODO_NOT_SHOW_SET_DONE_ALL':
+      val=
+      {
+        ...val
+        ,showSetDoneAll:false
       }
       return val
     default:
