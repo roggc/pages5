@@ -1,4 +1,4 @@
-import React,{useReducer} from 'react'
+import React from 'react'
 import {Div,Container,Fade,FloatL,FloatR,Container2,Abs} from './styled'
 import Header from '../header/index'
 import Footer from '../footer/index'
@@ -14,14 +14,15 @@ import PageCounter from '../pageCounter/index'
 import Todo from '../todo/index'
 import reducer from './reducer'
 import initialState from './state'
+import useReducerWithKey from '../../hooks/useReducerWithKey'
 
 export default
 ()=>
 {
-  const [state1,dispatch1]=useReducer(reducer,initialState)
-  const [state2,dispatch2]=useReducer(reducer,initialState)
-  const [state3,dispatch3]=useReducer(reducer,initialState)
-  const [state4,dispatch4]=useReducer(reducer,initialState)
+  const [state1,dispatch1]=useReducerWithKey(reducer,initialState,'state1')
+  const [state2,dispatch2]=useReducerWithKey(reducer,initialState,'state2')
+  const [state3,dispatch3]=useReducerWithKey(reducer,initialState,'state3')
+  const [state4,dispatch4]=useReducerWithKey(reducer,initialState,'state4')
   const el=
   <Div>
   <Router>
