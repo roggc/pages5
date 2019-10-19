@@ -1,5 +1,5 @@
 export default
-(val,act)=>
+(val={},act)=>
 {
   switch(act.type)
   {
