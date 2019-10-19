@@ -112,9 +112,9 @@ export default
       <span className='tooltip'>add todo</span>
     </div>
     &nbsp;
-    <button onClick={clearTodos}><FontAwesomeIcon icon={faTrashAlt}/>/All</button>
-    &nbsp;
     <button onClick={setDoneAll}><img src={check}/>/All</button>
+    &nbsp;
+    <button onClick={clearTodos}><FontAwesomeIcon icon={faTrashAlt}/>/All</button>
     <ul>
       {
         todo.todos.map
