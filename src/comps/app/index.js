@@ -27,7 +27,7 @@ export default
   <UserCtx.Provider value={redux1.state.login.user}>
   <Router>
     <Container>
-      <Header/>
+      <Header redux={redux1}/>
     </Container>
     <Container2>
         <Route render=
@@ -54,11 +54,16 @@ export default
               <Route path='/counters1' render=
               {
                 ()=>
-                <Abs>
-                  <PageCounter
-                  redux1={redux1}
-                  redux2={redux2}/>
-                </Abs>
+                {
+                  const el=
+                  <Abs>
+                    <PageCounter
+                    redux1={redux1}
+                    redux2={redux2}/>
+                  </Abs>
+                  return el
+                }
+
               }/>
               <Route path='/counters2' render=
               {
