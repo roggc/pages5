@@ -1,6 +1,7 @@
 import count from '../counter2/state'
 import todo from '../todo/state'
 import login from '../login/state'
+import signin from '../signin/state'
 
 const app=
 {
@@ -13,4 +14,5 @@ export default
   ,count
   ,login
   ,app
+  ,signin
 }

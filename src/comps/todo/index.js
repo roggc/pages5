@@ -1,12 +1,14 @@
-import React,{useReducer,useRef,useEffect} from 'react'
+import React,{useReducer,useRef,useEffect,useContext} from 'react'
 import {Div} from './styled'
 import check from '../../img/check.png'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faTrashAlt,faPlus} from '@fortawesome/free-solid-svg-icons'
+import {UserCtx} from '../../ctx/index'
 
 export default
 ({redux:{state:{todo},dispatch}})=>
 {
+  const user=useContext(UserCtx)
   const addTodo=
   ()=>
   dispatch({type:'TODO_SHOW_NEW_TODO'})
@@ -107,36 +109,42 @@ export default
       </div>:
       ''
     }
-    <div className='tooltip-container'>
-      <button onClick={addTodo}><FontAwesomeIcon icon={faPlus}/></button>
-      <span className='tooltip'>add todo</span>
-    </div>
-    &nbsp;
-    <button onClick={setDoneAll}><img src={check}/>/All</button>
-    &nbsp;
-    <button onClick={clearTodos}><FontAwesomeIcon icon={faTrashAlt}/>/All</button>
-    <ul>
-      {
-        todo.todos.map
-        (
-          (todo,i)=>
-          <li key={i}>
-            {todo.text}&nbsp;
-            {
-              todo.done?
-              <div className='inline'>
-                <img src={check}/>&nbsp;
-                <button onClick={deleteTodo(i)}><FontAwesomeIcon icon={faTrashAlt}/></button>
-              </div>:
-              <div className='inline'>
-                <button onClick={setDone(i)}><img src={check}/></button>&nbsp;
-                <button onClick={deleteTodo(i)}><FontAwesomeIcon icon={faTrashAlt}/></button>
-              </div>
-            }
-          </li>
-        )
-      }
-    </ul>
+    {
+      user?
+      <div>
+        <div className='tooltip-container'>
+          <button onClick={addTodo}><FontAwesomeIcon icon={faPlus}/></button>
+          <span className='tooltip'>add todo</span>
+        </div>
+        &nbsp;
+        <button onClick={setDoneAll}><img src={check}/>/All</button>
+        &nbsp;
+        <button onClick={clearTodos}><FontAwesomeIcon icon={faTrashAlt}/>/All</button>
+        <ul>
+          {
+            todo.todos.map
+            (
+              (todo,i)=>
+              <li key={i}>
+                {todo.text}&nbsp;
+                {
+                  todo.done?
+                  <div className='inline'>
+                    <img src={check}/>&nbsp;
+                    <button onClick={deleteTodo(i)}><FontAwesomeIcon icon={faTrashAlt}/></button>
+                  </div>:
+                  <div className='inline'>
+                    <button onClick={setDone(i)}><img src={check}/></button>&nbsp;
+                    <button onClick={deleteTodo(i)}><FontAwesomeIcon icon={faTrashAlt}/></button>
+                  </div>
+                }
+              </li>
+            )
+          }
+        </ul>
+      </div>:
+      <div className='todo-center'>you must &nbsp;<strong>login</strong>&nbsp; please</div>
+    }
   </Div>
   return el
 }

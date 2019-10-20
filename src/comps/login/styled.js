@@ -24,6 +24,7 @@ button
   font-size:.9em;
   border-radius:5px;
   cursor:pointer;
+  padding:4px;
 }
 .center
 {
@@ -60,5 +61,9 @@ a:hover
 {
   text-decoration:underline;
   cursor:pointer;
+}
+.row.last
+{
+  margin-top:23px;
 }
 `

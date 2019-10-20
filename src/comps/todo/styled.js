@@ -95,4 +95,11 @@ img
     opacity:1;
   }
 }
+.todo-center
+{
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
 `

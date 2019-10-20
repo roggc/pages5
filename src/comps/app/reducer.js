@@ -2,6 +2,7 @@ import combine from '../../redux/combineReducers'
 import todo from '../todo/reducer'
 import count from '../counter2/reducer'
 import login from '../login/reducer'
+import signin from '../signin/reducer'
 
 const app=
 (val={},act)=>
@@ -28,5 +29,6 @@ combine
     ,count
     ,login
     ,app
+    ,signin
   }
 )

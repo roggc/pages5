@@ -1,10 +1,14 @@
 import React from 'react'
-import {} from './styled'
+import {Div} from './styled'
 
 export default
 ()=>
 {
   const el=
-  <div>abouuuuuuuuuuuuut</div>
+  <Div>
+    <div className='about-center'>
+      abouuuuuuuuuuuuut
+    </div>
+  </Div>
   return el
 }

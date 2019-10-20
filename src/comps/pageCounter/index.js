@@ -15,7 +15,7 @@ export default
       <Counter redux={redux1}/>
       <Counter redux={redux2}/>
     </div>:
-    <div>you must login</div>
+    <div className='pageCounter-center'>you must &nbsp;<strong>login</strong>&nbsp; please</div>
   }
   </Div>
   return el

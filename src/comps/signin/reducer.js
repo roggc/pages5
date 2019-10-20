@@ -3,11 +3,44 @@ export default
 {
   switch(act.type)
   {
-    case 'WWW':
+    case 'SIGNIN_SET_NAME':
       val=
       {
         ...val
-        ,kkk:act.val
+        ,queryVars:
+        {
+          ...val.queryVars
+          ,name:act.val
+        }
+      }
+      return val
+    case 'SIGNIN_SET_EMAIL':
+      val=
+      {
+        ...val
+        ,queryVars:
+        {
+          ...val.queryVars
+          ,email:act.val
+        }
+      }
+      return val
+    case 'SIGNIN_SET_PASSWORD':
+      val=
+      {
+        ...val
+        ,queryVars:
+        {
+          ...val.queryVars
+          ,psswrd:act.val
+        }
+      }
+      return val
+    case 'SIGNIN_SET_FETCHING':
+      val=
+      {
+        ...val
+        ,fetching:act.val
       }
       return val
     default:

@@ -1,6 +1,6 @@
 import React from 'react'
 import {Div} from './styled'
-import graphql from '../../graphql/index'
+import graphql,{apiUrl} from '../../graphql/index'
 import Spinner from '../spinner/index'
 
 const loginQuery=
@@ -37,7 +37,6 @@ mutation
   logout
 }
 `
-const apiUrl='http://localhost:5000'
 
 export default
 ({redux:{state:{login},dispatch}})=>
@@ -50,7 +49,7 @@ export default
     if(res=json.login.res)
     {
       dispatch({type:'LOGIN_SET_USER',val:{email:res.email,name:res.name}})
-      dispatch({type:'LOGIN_SET_SHOW_LOGIN',val:false})
+      //dispatch({type:'LOGIN_SET_SHOW_LOGIN',val:false})
     }
   }
   const logoutCb=
@@ -59,7 +58,7 @@ export default
     if(json.logout)
     {
       dispatch({type:'LOGIN_RESET_CREDENTIALS'})
-      dispatch({type:'LOGIN_SET_SHOW_LOGIN',val:true})
+      //dispatch({type:'LOGIN_SET_SHOW_LOGIN',val:true})
       dispatch({type:'LOGIN_RESET_USER'})
     }
     dispatch({type:'LOGIN_SET_FETCHING',val:false})
@@ -108,7 +107,10 @@ export default
     <div className='center'>
       <div className='center2'>
       {
-        login.showLogin?
+        login.user?
+        <div className='row'>
+          hola {login.user.name}.&nbsp;<a onClick={logoutClick}><strong>logout</strong></a>
+        </div>:
         <div>
           <div className='row'>
             <div>email</div>
@@ -118,16 +120,12 @@ export default
             <div>password</div>
             <div><input value={login.psswrd} onChange={psswrdChange}/></div>
           </div>
-          <div className='row'>
+          <div className='row last'>
             <button onClick={loginClick}>login</button>
           </div>
-        </div>:
-        <div className='row'>
-          hola {login.user.name}.&nbsp;<a onClick={logoutClick}>logout</a>
         </div>
       }
-
-       </div>
+      </div>
     </div>
   </Div>
   return el

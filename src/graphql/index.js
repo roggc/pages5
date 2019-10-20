@@ -1,3 +1,5 @@
+export const apiUrl='http://localhost:5000'
+
 export default
 query=>variables=>url=>cb=>
 {
