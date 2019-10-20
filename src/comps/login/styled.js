@@ -56,4 +56,9 @@ button
     text-align:center;
   }
 }
+a:hover
+{
+  text-decoration:underline;
+  cursor:pointer;
+}
 `

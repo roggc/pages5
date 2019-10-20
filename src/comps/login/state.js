@@ -1,6 +1,10 @@
 export default
 {
-  email:''
-  ,psswrd:''
+  credentials:
+  {
+    email:''
+    ,psswrd:''
+  }
   ,fetching:false
+  ,showLogin:true
 }

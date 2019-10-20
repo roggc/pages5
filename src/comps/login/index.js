@@ -3,7 +3,7 @@ import {Div} from './styled'
 import graphql from '../../graphql/index'
 import Spinner from '../spinner/index'
 
-const query=
+const loginQuery=
 `
 mutation ($email:String!,$psswrd:String!)
 {
@@ -30,22 +30,45 @@ mutation ($email:String!,$psswrd:String!)
   }
 }
 `
-const url='http://localhost:5000'
+const logoutQuery=
+`
+mutation
+{
+  logout
+}
+`
+const apiUrl='http://localhost:5000'
 
 export default
 ({redux:{state:{login},dispatch}})=>
 {
-  const cb=
+  const loginCb=
   json=>
   {
-    dispatch({type:'LOGIN_SET_FETCHING_FALSE'})
-    console.log(json)
+    let res
+    dispatch({type:'LOGIN_SET_FETCHING',val:false})
+    if(res=json.login.res)
+    {
+      dispatch({type:'LOGIN_SET_USER',val:{email:res.email,name:res.name}})
+      dispatch({type:'LOGIN_SET_SHOW_LOGIN',val:false})
+    }
+  }
+  const logoutCb=
+  json=>
+  {
+    if(json.logout)
+    {
+      dispatch({type:'LOGIN_RESET_CREDENTIALS'})
+      dispatch({type:'LOGIN_SET_SHOW_LOGIN',val:true})
+      dispatch({type:'LOGIN_RESET_USER'})
+    }
+    dispatch({type:'LOGIN_SET_FETCHING',val:false})
   }
   const loginClick=
   e=>
   {
-    dispatch({type:'LOGIN_SET_FETCHING_TRUE'})
-    graphql(query)(login)(url)(cb)
+    dispatch({type:'LOGIN_SET_FETCHING',val:true})
+    graphql(loginQuery)(login.credentials)(apiUrl)(loginCb)
   }
   const emailChange=
   e=>
@@ -65,6 +88,12 @@ export default
       ,val:e.target.value
     }
   )
+  const logoutClick=
+  e=>
+  {
+    dispatch({type:'LOGIN_SET_FETCHING',val:true})
+    graphql(logoutQuery)({})(apiUrl)(logoutCb)
+  }
   const el=
   <Div>
     {
@@ -78,6 +107,9 @@ export default
     }
     <div className='center'>
       <div className='center2'>
+      {
+        login.showLogin?
+        <div>
           <div className='row'>
             <div>email</div>
             <div><input value={login.email} onChange={emailChange}/></div>
@@ -89,6 +121,12 @@ export default
           <div className='row'>
             <button onClick={loginClick}>login</button>
           </div>
+        </div>:
+        <div className='row'>
+          hola {login.user.name}.&nbsp;<a onClick={logoutClick}>logout</a>
+        </div>
+      }
+
        </div>
     </div>
   </Div>

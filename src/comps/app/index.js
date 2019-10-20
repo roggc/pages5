@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{createContext} from 'react'
 import {Div,Container,Fade,FloatL,FloatR,Container2,Abs} from './styled'
 import Header from '../header/index'
 import Footer from '../footer/index'
@@ -12,6 +12,8 @@ import Todo from '../todo/index'
 import reducer from './reducer'
 import initialState from './state'
 import useReducerWithKey from '../../hooks/useReducerWithKey'
+import {UserCtx} from '../../ctx/index'
+import Signin from '../signin/index'
 
 export default
 ()=>
@@ -22,6 +24,7 @@ export default
   const redux4=useReducerWithKey(reducer,initialState,'state4')
   const el=
   <Div>
+  <UserCtx.Provider value={redux1.state.login.user}>
   <Router>
     <Container>
       <Header/>
@@ -37,6 +40,11 @@ export default
             appear={true}>
             <Switch location={location}>
               <Route path='/' exact render=
+              {
+                ()=>
+                <Abs><Signin redux={redux1}/></Abs>
+              }/>
+              <Route path='/login' render=
               {
                 ()=>
                 <Abs><Login redux={redux1}/></Abs>
@@ -83,6 +91,7 @@ export default
       <Footer/>
     </Container>
     </Router>
+    </UserCtx.Provider>
   </Div>
   return el
 }
