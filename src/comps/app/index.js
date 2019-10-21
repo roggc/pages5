@@ -1,4 +1,4 @@
-import React,{createContext} from 'react'
+import React,{createContext,useReducer} from 'react'
 import {Div,Container,Fade,FloatL,FloatR,Container2,Abs} from './styled'
 import Header from '../header/index'
 import Footer from '../footer/index'
@@ -11,17 +11,22 @@ import PageCounter from '../pageCounter/index'
 import Todo from '../todo/index'
 import reducer from './reducer'
 import initialState from './state'
-import useReducerWithKey from '../../hooks/useReducerWithKey'
+import useReducerWithKey from '../../hooks/useReducerWithDb'
 import {UserCtx} from '../../ctx/index'
 import Signin from '../signin/index'
 
 export default
 ()=>
 {
-  const redux1=useReducerWithKey(reducer,initialState,'state1')
-  const redux2=useReducerWithKey(reducer,initialState,'state2')
-  const redux3=useReducerWithKey(reducer,initialState,'state3')
-  const redux4=useReducerWithKey(reducer,initialState,'state4')
+  const redux1= useReducerWithKey(reducer,initialState,'state1','state1')
+  const redux2= useReducerWithKey(reducer,initialState,'state2','state1')
+  const redux3= useReducerWithKey(reducer,initialState,'state3','state1')
+  const redux4= useReducerWithKey(reducer,initialState,'state4','state1')
+    // const redux1= useReducer(reducer,initialState)
+    // const redux2= useReducer(reducer,initialState)
+    // const redux3= useReducer(reducer,initialState)
+    // const redux4= useReducer(reducer,initialState)
+    console.log(redux1)
   const el=
   <Div>
   <UserCtx.Provider value={redux1.state.login.user}>
